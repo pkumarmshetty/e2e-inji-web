@@ -14,17 +14,17 @@ import utils.BaseTest;
 import utils.GlobelConstants;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 
 public class StepDef {
     String pageTitle;
     public WebDriver driver;
     BaseTest baseTest;
-    private GlobelConstants globelConstants;
     private HomePage homePage;
     private HelpPage helpPage;
     private SetNetwork setNetwork;
-
+    private GlobelConstants globelConstants;
     public StepDef(BaseTest baseTest) {
         this.baseTest = baseTest;
         this.homePage = new HomePage(baseTest.getDriver());
@@ -82,12 +82,9 @@ public class StepDef {
     }
 
     @Then("User verify Download Success text displayed")
-    public void user_verify_download_success_text_displayed() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+    public void user_verify_download_success_text_displayed() throws InterruptedException {
+        Thread.sleep(10000);
+        baseTest.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         Assert.assertTrue(homePage.isSuccessMessageDisplayed());
     }
 
@@ -152,9 +149,9 @@ public class StepDef {
     @Then("User verify home screens in arabic")
     public void user_verify_home_screens_in_arabic() {
         Assert.assertEquals(homePage.isHomePageTextDisplayed(), globelConstants.HomePageTextInArabic);
-        Assert.assertEquals(homePage.isHomePageDescriptionTextDisplayed(), globelConstants.isHomePageDescriptionTextnArabic);
-//        Assert.assertEquals(homePage.isListOfIssuersTextDisplayed(), globelConstants.ListOfCredentialTypeOnHomePageInArabic);
-//        Assert.assertEquals(homePage.isListOfIssuersDescriptionTextDisplayed(), globelConstants.ListOfCredentialDescriptionTextInArabic);
+        Assert.assertEquals(homePage.getHomePageDescriptionText(), globelConstants.isHomePageDescriptionTextnArabic);
+        Assert.assertEquals(homePage.isListOfIssuersTextDisplayed(), globelConstants.ListOfCredentialTypeOnHomePageInArabic);
+        Assert.assertEquals(homePage.isListOfIssuersDescriptionTextDisplayed(), globelConstants.ListOfCredentialDescriptionTextInArabic);
     }
 
     @Then("User click on tamil langauge")
@@ -165,9 +162,9 @@ public class StepDef {
     @Then("User verify home screens in tamil")
     public void user_verify_home_screens_in_tamil() {
         Assert.assertEquals(homePage.isHomePageTextDisplayed(), globelConstants.HomePageTextInTamil);
-        Assert.assertEquals(homePage.isHomePageDescriptionTextDisplayed(), globelConstants.isHomePageDescriptionTextnTamil);
-//        Assert.assertEquals(homePage.isListOfIssuersTextDisplayed(), globelConstants.ListOfCredentialTypeOnHomePageInTamil);
-//        Assert.assertEquals(homePage.isListOfIssuersDescriptionTextDisplayed(), globelConstants.ListOfCredentialDescriptionTextInTamil);
+        Assert.assertEquals(homePage.getHomePageDescriptionText(), globelConstants.isHomePageDescriptionTextnTamil);
+        Assert.assertEquals(homePage.isListOfIssuersTextDisplayed(), globelConstants.ListOfCredentialTypeOnHomePageInTamil);
+        Assert.assertEquals(homePage.isListOfIssuersDescriptionTextDisplayed(), globelConstants.ListOfCredentialDescriptionTextInTamil);
     }
 
     @Then("User click on kannada langauge")
@@ -178,9 +175,9 @@ public class StepDef {
     @Then("User verify home screens in kannada")
     public void user_verify_home_screens_in_kannada() {
         Assert.assertEquals(homePage.isHomePageTextDisplayed(), globelConstants.HomePageTextInKannada);
-        Assert.assertEquals(homePage.isHomePageDescriptionTextDisplayed(), globelConstants.HomePageDescriptionTextInKannada);
-//        Assert.assertEquals(homePage.isListOfIssuersTextDisplayed(), globelConstants.ListOfCredentialTypeOnHomePageInKannada);
-//        Assert.assertEquals(homePage.isListOfIssuersDescriptionTextDisplayed(), globelConstants.ListOfCredentialDescriptionTextInKannada);
+        Assert.assertTrue(homePage.isHomePageDescriptionTextDisplayed());
+        Assert.assertEquals(homePage.isListOfIssuersTextDisplayed(), globelConstants.ListOfCredentialTypeOnHomePageInKannada);
+        Assert.assertEquals(homePage.isListOfIssuersDescriptionTextDisplayed(), globelConstants.ListOfCredentialDescriptionTextInKannada);
     }
 
     @Then("User click on hindi langauge")
@@ -191,9 +188,9 @@ public class StepDef {
     @Then("User verify home screens in hindi")
     public void user_verify_home_screens_in_hindi() {
         Assert.assertEquals(homePage.isHomePageTextDisplayed(), globelConstants.HomePageTextInHindi);
-        Assert.assertEquals(homePage.isHomePageDescriptionTextDisplayed(),globelConstants.HomePageDescriptionTextInHindi);
-//        Assert.assertEquals(homePage.isListOfIssuersTextDisplayed(), globelConstants.ListOfCredentialTypeOnHomePageInHindi);
-//        Assert.assertEquals(homePage.isListOfIssuersDescriptionTextDisplayed(), globelConstants.ListOfCredentialDescriptionTextInHindi);
+        Assert.assertEquals(homePage.getHomePageDescriptionText(),globelConstants.HomePageDescriptionTextInHindi);
+        Assert.assertEquals(homePage.isListOfIssuersTextDisplayed(), globelConstants.ListOfCredentialTypeOnHomePageInHindi);
+        Assert.assertEquals(homePage.isListOfIssuersDescriptionTextDisplayed(), globelConstants.ListOfCredentialDescriptionTextInHindi);
     }
 
     @Then("User click on french langauge")
@@ -203,12 +200,10 @@ public class StepDef {
 
     @Then("User verify home screens in french")
     public void user_verify_home_screens_in_french() {
-        System.out.println(homePage.isHomePageTextDisplayed());
-        System.out.println(homePage.isHomePageDescriptionTextDisplayed());
         Assert.assertEquals(homePage.isHomePageTextDisplayed(), globelConstants.HomePageTextInFrench);
-        Assert.assertEquals(homePage.isHomePageDescriptionTextDisplayed(), globelConstants.HomePageDescriptionTextInFrench);
-//        Assert.assertEquals(homePage.isListOfIssuersTextDisplayed(), globelConstants.ListOfCredentialTypeOnHomePageInFrench);
-//        Assert.assertEquals(homePage.isListOfIssuersDescriptionTextDisplayed(), globelConstants.ListOfCredentialDescriptionTextInFrench);
+        Assert.assertEquals(homePage.getHomePageDescriptionText(), globelConstants.HomePageDescriptionTextInFrench);
+        Assert.assertEquals(homePage.isListOfIssuersTextDisplayed(), globelConstants.ListOfCredentialTypeOnHomePageInFrench);
+        Assert.assertEquals(homePage.isListOfIssuersDescriptionTextDisplayed(), globelConstants.ListOfCredentialDescriptionTextInFrench);
     }
 
     @Then("User validate the list of credential types title of the page")
@@ -330,7 +325,7 @@ public class StepDef {
     public void user_verify_the_only_one_faq_is_at_a_time() {
         helpPage.ClickOnDownArrow();
         Assert.assertEquals(helpPage.getUpArrowCount(),1);
-        Assert.assertEquals(helpPage.getDownArrowCount(),6);
+        Assert.assertEquals(helpPage.getDownArrowCount(),22);
     }
 
     @Then("User verify that help button displayed")
@@ -368,5 +363,101 @@ public class StepDef {
     @When("User verify the logo of the issuer")
     public void user_verify_the_logo_of_the_issuer() {
         homePage.isIssuerLogoDisplayed();
+    }
+
+
+    @Then("User verify that home banner heading")
+    public void user_verify_that_home_banner_heading() {
+        homePage.isHomeBannerHeadingDisplayed();
+    }
+    @Then("User verify that home banner description")
+    public void user_verify_that_home_banner_description() {
+        homePage.isHomeBannerHeadingDescriptionDisplayed();
+    }
+    @Then("User verify that home banner get started")
+    public void user_verify_that_home_banner_get_started() {
+        homePage.isGetStartedButtonDisplayed();
+    }
+    @Then("User verify that home features heading")
+    public void user_verify_that_home_features_heading() {
+        homePage.isFeatureHeadingDisplayed();
+    }
+    @Then("User verify that home features description1")
+    public void user_verify_that_home_features_description1() {
+        homePage.isFeatureDescriptionDisplayed();
+    }
+    @Then("User verify that home features mobile image")
+    public void user_verify_that_home_features_mobile_image() {
+        homePage.isFeatureMobileImageDisplayed();
+    }
+    @Then("User verify that home features desktop image")
+    public void user_verify_that_home_features_desktop_image() {
+        homePage.isFeatureDesktopImageDisplayed();
+    }
+    @Then("User verify that home feature item image")
+    public void user_verify_that_home_feature_item_image() {
+        Assert.assertTrue(homePage.isAccessYourCredentialsImageDisplayed());
+        Assert.assertTrue(homePage.isYourDocumentsDownloadedImageDisplayed());
+        Assert.assertTrue(homePage.isEasySharingImageDisplayed());
+        Assert.assertTrue(homePage.isSecureAndPrivateImageDisplayed());
+        Assert.assertTrue(homePage.isWiderAccessAndCompatibilityImageDisplayed());
+    }
+    @Then("User verify that home feature Heading")
+    public void user_verify_that_home_feature_item_heading() {
+
+        Assert.assertTrue(homePage.isAccessYourCredentialsTextHeaderDisplayed());
+        Assert.assertTrue(homePage.isYourDocumentsDownloadedTextHeaderDisplayed());
+        Assert.assertTrue(homePage.isEasySharingTextHeaderDisplayed());
+        Assert.assertTrue(homePage.isSecureAndPrivateDisplayed());
+        Assert.assertTrue(homePage.isWiderAccessAndCompatibilityDisplayed());
+    }
+    @Then("User verify that home feature item header for all")
+    public void user_verify_that_home_feature_first_item() {
+        Assert.assertTrue(homePage.isCredentialsSimplifiedTextDisplayed());
+        Assert.assertTrue(homePage.isNoMorePaperworkTextDisplayed());
+        Assert.assertTrue(homePage.isDownloadWithConfidenceTextDisplayed());
+        Assert.assertTrue(homePage.isSafeAndSoundTextDisplayed());
+        Assert.assertTrue(homePage.isShareWithQRCodeTextDisplayed());
+        Assert.assertTrue(homePage.isReadSetShareTextDisplayed());
+        Assert.assertTrue(homePage.isYourCredentialsProtectedTextDisplayed());
+        Assert.assertTrue(homePage.isRestEasyTextDisplayed());
+        Assert.assertTrue(homePage.isAvailableOnYourFavouriteBrowserTextDisplayed());
+        Assert.assertTrue(homePage.isAlwaysWithinReachTextDisplayed());
+    }
+    @Then("User verify that home feature feature description")
+    public void user_verify_that_home_feature_first_feature_description() {
+        Assert.assertTrue(homePage.isCredentialsSimplifiedDescriptionTextDisplayed());
+        Assert.assertTrue(homePage.isNomorePaperworkDescriptionTextDisplayed());
+        Assert.assertTrue(homePage.isDownloadwithConfidenceDescriptionTextDisplayed());
+        Assert.assertTrue(homePage.isSafeAndSoundDescriptionTextDisplayed());
+        Assert.assertTrue(homePage.isSharewithQRCodeDescriptionTextDisplayed());
+        Assert.assertTrue(homePage.isReadSetShareDescriptionTextDisplayed());
+        Assert.assertTrue(homePage.isYourCredentialsProtectedDescriptionTextDisplayed());
+        Assert.assertTrue(homePage.isRestEasyDescriptionTextDisplayed());
+        Assert.assertTrue(homePage.isAvailableOnYourFavouriteBrowserDescriptionTextDisplayed());
+        Assert.assertTrue(homePage.isAlwaysWithinReachDescriptionTextDisplayed());
+    }
+
+    @Then("User click on get started button")
+    public void user_click_on_get_started_button() {
+        homePage.clickOnGetStartedButton();
+    }
+
+    @Then("User click on data share content validity")
+    public void user_click_on_data_share_content_validity() {
+        homePage.clickOnConsentValidityButton();
+    }
+    @Then("User click on select custom validity button")
+    public void user_click_on_select_custom_validity_button() {
+        homePage.clickOnConsentValidityAsCustom();
+    }
+    @Then("user enter validity for data share content {string}")
+    public void user_enter_validity_for_data_share_content(String string) {
+        homePage.enterConsentValidityAsCustom(string);
+    }
+    @Then("Use click on procced button")
+    public void use_click_on_procced_button() {
+        homePage.clickOnProccedCustomButton();
+        homePage.clickOnProccedConsentButton();
     }
 }

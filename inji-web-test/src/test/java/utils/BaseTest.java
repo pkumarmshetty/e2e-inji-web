@@ -28,6 +28,7 @@ public class BaseTest {
     public JavascriptExecutor jse;
     public String  PdfNameForMosip="MosipVerifiableCredential.pdf";
     public String  PdfNameForInsurance="InsuranceCredential.pdf";
+    public String  PdfNameForLifeInsurance="InsuranceCredential.pdf";
 
     String accessKey = getKeyValueFromYaml("/browserstack.yml","accessKey");
     String userName = getKeyValueFromYaml("/browserstack.yml","userName");
