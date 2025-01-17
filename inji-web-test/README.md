@@ -10,12 +10,6 @@ Ensure the following software is installed on the machine from where the automat
 - The project requires JDK 21
 - Maven 3.6.0 or higher
 
-## Build
-1. Clone the repository by git clone https://github.com/mosip/inji-web.git
-2. Change directory by using command 'cd ../inji-web-test'  & Build the JAR file: `mvn clean package -DskipTests=true`
-3. The JAR file will be generated in the `target` directory.
-
-
 ## BrowserStack
 1. singup to browserStack & get the userName and accessKey from home page on browserStack  
 2. update the userName and accessKey from browserstack.yml
