@@ -16,3 +16,8 @@ istio:
     rewrite: /v1/datashare
     gateways:
       - datashare-inji
+
+# Override the envFrom field to exclude 'artifactory-share'
+extraEnvVarsCM:
+  - global
+  - config-server-share
