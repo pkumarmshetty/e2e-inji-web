@@ -66,24 +66,6 @@ public class StepDefSunbirdCredentials {
         sunbirdCredentials.selectDateOfBirth(string);
     }
 
-
-
-
-
-//    @Then("User click on login button")
-//    public void user_click_on_login_button() {
-//        int retrycount =0;
-//        if(sunbirdCredentials.isLoginButtonDisplayed()==true && retrycount<4){
-//            sunbirdCredentials.clickOnLogin();
-//
-//        if(sunbirdCredentials.isLoginFailedDisplayed()==true){
-//            retrycount++;
-//        }else if(homePage.isSuccessMessageDisplayed()){
-//            break;
-//        }
-//        }
-//    }
-
     @Then("User click on login button")
     public void user_click_on_login_button() throws InterruptedException {
         int retryCount = 0;
