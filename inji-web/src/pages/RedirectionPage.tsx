@@ -44,7 +44,10 @@ export const RedirectionPage: React.FC = () => {
                 let credentialDownloadResponse = await fetchRequest(
                     apiRequest.url(),
                     apiRequest.methodType,
-                    apiRequest.headers(),
+                    {
+                        ...apiRequest.headers(),
+                        'ngrok-skip-browser-warning': 'true', // Custom header
+                    },
                     requestBody
                 );
                 if (state !== RequestStatus.ERROR) {

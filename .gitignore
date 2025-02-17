@@ -5,3 +5,10 @@ helm/inji-web/Chart.lock
 inji-web/node_modules
 inji-web/build
 inji-web/coverage
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

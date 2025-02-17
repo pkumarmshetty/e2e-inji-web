@@ -34,7 +34,10 @@ export const CredentialsPage: React.FC = () => {
             let response = await fetchRequest(
                 apiRequest.url(params.issuerId ?? ""),
                 apiRequest.methodType,
-                apiRequest.headers()
+                {
+                    ...apiRequest.headers(),
+                    'ngrok-skip-browser-warning': 'true', // Custom header
+                }
             );
             dispatch(storeSelectedIssuer(response?.response));
             setSelectedIssuer(response?.response);

@@ -22,7 +22,10 @@ export const IssuersPage: React.FC = () => {
             const response = await fetchRequest(
                 apiRequest.url(),
                 apiRequest.methodType,
-                apiRequest.headers()
+                {
+                    ...apiRequest.headers(),
+                    'ngrok-skip-browser-warning': 'true', // Custom header
+                }
             );
             const issuers = response?.response?.issuers.filter((issuer: IssuerObject) => issuer.protocol !== "OTP")
             dispatch(storeFilteredIssuers(issuers));

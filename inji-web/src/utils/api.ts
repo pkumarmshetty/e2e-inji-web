@@ -23,7 +23,8 @@ export class api {
         methodType: MethodType.GET,
         headers: () => {
             return {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'ngrok-skip-browser-warning': 'true'
             }
         }
     }
@@ -41,7 +42,8 @@ export class api {
         methodType: MethodType.GET,
         headers: () => {
             return {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'ngrok-skip-browser-warning': 'true'
             }
         }
     }
@@ -52,7 +54,8 @@ export class api {
             return {
                 'accept': 'application/pdf',
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Cache-Control': 'no-cache, no-store, must-revalidate'
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'ngrok-skip-browser-warning': 'true'
             }
         }
     }
