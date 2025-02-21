@@ -67,6 +67,7 @@ pipeline {
                 }
             }
         }
+    }
 post {
         success {
             echo "Pipeline completed successfully! Pushed Docker Image: ${DOCKER_IMAGE}"
@@ -75,5 +76,4 @@ post {
             echo "Pipeline failed! Last attempted Docker Image Tag: ${DOCKER_IMAGE}"
         }
     }
-}
 }
