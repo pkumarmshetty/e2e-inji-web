@@ -5,6 +5,8 @@ pipeline {
         GIT_REPO = 'https://github.com/pkumarmshetty/e2e-inji-web.git'
         GIT_BRANCH = 'test' 
         DOCKER_IMAGE_BASE = 'raparna154/inji-web-service'
+        MANIFEST_REPO = 'https://github.com/Aparnadeloitte/Inji-infra-azure.git'
+        MANIFEST_BRANCH = 'main'
     }
 
     stages {
