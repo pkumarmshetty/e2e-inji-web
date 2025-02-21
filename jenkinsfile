@@ -66,11 +66,42 @@ pipeline {
                 }
             }
         }
+
+        stage('Update Manifest Repo') {
+             steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'githubpat2', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
+                        sh """
+                        rm -rf Inji-infra-azure
+                        # Clone manifest repo
+                        git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/Aparnadeloitte/Inji-infra-azure.git
+                        cd Inji-infra-azure
+                        git checkout ${MANIFEST_BRANCH}
+
+                        echo "Before update:"
+                        cat inji-web/values.yaml || true
+
+                        # Force update the image tag
+                        echo "image: ${env.DOCKER_IMAGE}" > inji-web/values.yaml
+
+                        # Debugging: Show after update
+                        echo "After update:"
+                        cat inji-web/values.yaml
+
+                        # Commit & Push changes if there are any
+                        git add inji-web/values.yaml
+                        git commit -m "Auto-update image tag to ${env.DOCKER_IMAGE}" || echo "No changes to commit"
+                        git push origin ${MANIFEST_BRANCH}
+                        """
+                    }
+                }
+            }
+        }
     }
 
     post {
         success {
-            echo "Pipeline completed successfully! Pushed Docker Image: ${env.DOCKER_IMAGE}"
+            echo "Pipeline completed successfully! updated image: ${env.DOCKER_IMAGE} in manifest repo."
         }
         failure {
             echo "Failed! Last attempted Docker Image Tag: ${env.DOCKER_IMAGE}"
