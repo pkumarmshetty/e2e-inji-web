@@ -84,7 +84,8 @@ pipeline {
                         cat inji-web/values.yaml || true
 
                         # Force update the image tag
-                        echo "image: ${env.DOCKER_IMAGE}" > inji-web/values.yaml
+                        yq eval '.image.repository = "'${env.DOCKER_IMAGE}'"' -i inji-verify/values.yaml
+                        #echo "image: ${env.DOCKER_IMAGE}" > inji-web/values.yaml
 
                         # Debugging: Show after update
                         echo "After update:"
