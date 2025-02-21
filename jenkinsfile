@@ -45,7 +45,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dir('e2e_inji_web/inji-web') {
+                    dir("${WORKSPACE}/e2e_inji_web/inji-web") {
                         sh """
                         docker build -t $DOCKER_IMAGE .
                         """
