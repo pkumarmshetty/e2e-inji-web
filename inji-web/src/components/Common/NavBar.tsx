@@ -7,6 +7,7 @@ import {SearchCredential} from "../Credentials/SearchCredential";
 export const NavBar: React.FC<NavBarProps> = (props) => {
 
     const navigate = useNavigate();
+    
     return <React.Fragment>
         <div data-testid="NavBar-Outer-Container"
              className="bg-gradient-to-r from-iw-lightPrimary to-iw-lightSecondary text-iw-title p-4 py-10">
