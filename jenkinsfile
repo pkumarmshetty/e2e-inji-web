@@ -24,6 +24,7 @@ pipeline {
                         git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/pkumarmshetty/e2e-inji-web.git
                         cd e2e-inji-web
                         git checkout ${GIT_BRANCH}
+                        git pull
                         """
                     }
                 }
