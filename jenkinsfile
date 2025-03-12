@@ -62,7 +62,7 @@ pipeline {
 
                         # Force update the image tag
                         yq eval '.image.repository = "raparna154/inji-web-service" |
-                       .image.tag = "'"${env.COMMIT_HASH}-${env.BUILD_NUMBER}"'"
+                       .image.tag = "'"${env.GIT_COMMIT}-${env.BUILD_NUMBER}"'"
                         ' -i inji-web/values.yaml
 
                         # Debugging: Show after update
