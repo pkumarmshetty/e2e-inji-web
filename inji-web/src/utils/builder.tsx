@@ -17,7 +17,7 @@ export const renderContent = (content: string | { __html: string }) => {
 };
 
 export const renderGradientText = (title:string) => {
-    return <span className="bg-gradient-to-r from-iw-primary to-iw-secondary bg-clip-text text-md font-bold text-transparent">{title}</span>
+    return <span className="bg-gradient-to-r from-[--iw-color-primary] to-[--iw-color-secondary] bg-clip-text text-md font-bold text-transparent">{title}</span>
 }
 
 export const constructContent = (descriptions: string[],applyHTML:boolean) => {

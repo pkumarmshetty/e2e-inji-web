@@ -4,5 +4,5 @@ window._env_ = {
     DEFAULT_FAVICON: "favicon.ico",
     DEFAULT_TITLE: "T&T Web",
     DEFAULT_FONT_URL: "https://fonts.googleapis.com/css?family=Inter",
-    MIMOTO_HOST: "https://vertically-wealthy-sheepdog.ngrok-free.app/inji/residentmobileapp"
+    MIMOTO_HOST: "https://injiweb.dpgongcp.com/inji/residentmobileapp"
 };

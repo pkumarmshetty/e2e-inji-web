@@ -65,7 +65,7 @@ export const HomeFeatures: React.FC = () => {
             <span
               key={index}
               className={`w-2 h-2 rounded-md mx-1 transition duration-300 ${
-                index === currentFeature ? "scale-125 bg-gradient-to-r from-orange-500 to-purple-700 w-7 h-2 rounded-full" : "bg-gray-300"
+                index === currentFeature ? "scale-125 bg-gradient-to-r from-[--iw-color-primary] to-[--iw-color-secondary] w-7 h-2 rounded-full" : "bg-gray-300"
               }`}
             ></span>
           ))}
