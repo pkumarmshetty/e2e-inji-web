@@ -24,7 +24,7 @@ export class api {
         headers: () => {
             return {
                 "Content-Type": "application/json",
-                'ngrok-skip-browser-warning': 'true'
+                // 'ngrok-skip-browser-warning': 'true'
             }
         }
     }
@@ -43,7 +43,7 @@ export class api {
         headers: () => {
             return {
                 "Content-Type": "application/json",
-                'ngrok-skip-browser-warning': 'true'
+                // 'ngrok-skip-browser-warning': 'true'
             }
         }
     }
@@ -55,7 +55,7 @@ export class api {
                 'accept': 'application/pdf',
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Cache-Control': 'no-cache, no-store, must-revalidate',
-                'ngrok-skip-browser-warning': 'true'
+                // 'ngrok-skip-browser-warning': 'true'
             }
         }
     }

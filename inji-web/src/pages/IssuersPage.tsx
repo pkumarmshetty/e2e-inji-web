@@ -24,7 +24,7 @@ export const IssuersPage: React.FC = () => {
                 apiRequest.methodType,
                 {
                     ...apiRequest.headers(),
-                    'ngrok-skip-browser-warning': 'true', // Custom header
+                    // 'ngrok-skip-browser-warning': 'true', // Custom header
                 }
             );
             const issuers = response?.response?.issuers.filter((issuer: IssuerObject) => issuer.protocol !== "OTP")

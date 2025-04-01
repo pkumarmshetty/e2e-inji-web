@@ -14,12 +14,12 @@ export const NavBar: React.FC<NavBarProps> = (props) => {
             <nav data-testid="NavBar-Inner-Container"
                  className=" mx-auto flex flex-col justify-start container items-start
                              sm:flex-row sm:justify-start sm:items-center">
-                <div className="flex items-center my-5 sm:my-0">
+                <div className="flex items-center my-5 sm:my-0 text-white">
                     <div className={"cursor-pointer"}>
                         <IoArrowBack data-testid="NavBar-Back-Arrow" size={24} onClick={() => navigate(props.link)}/>
                     </div>
                     <span data-testid="NavBar-Text"
-                          className="text-2xl font-semibold ps-2 whitespace-nowrap">{props.title}</span>
+                          className=" text-white text-2xl font-semibold ps-2 whitespace-nowrap">{props.title}</span>
                 </div>
                 {props.search && <SearchCredential />}
             </nav>

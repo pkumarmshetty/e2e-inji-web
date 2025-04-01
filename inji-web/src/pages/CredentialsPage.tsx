@@ -36,7 +36,7 @@ export const CredentialsPage: React.FC = () => {
                 apiRequest.methodType,
                 {
                     ...apiRequest.headers(),
-                    'ngrok-skip-browser-warning': 'true', // Custom header
+                    // 'ngrok-skip-browser-warning': 'true', // Custom header
                 }
             );
             dispatch(storeSelectedIssuer(response?.response));

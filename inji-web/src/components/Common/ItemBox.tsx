@@ -11,7 +11,7 @@ export const ItemBox: React.FC<ItemBoxProps> = (props) => {
              tabIndex={0}
              role="menuitem">
             <img data-testid="ItemBox-Logo" src={props.url} alt="Issuer Logo"
-                 className="w-20 h-20 items-center justify-center me-4 flex"/>
+                 className="w-20 h-20 items-center justify-center me-4 flex object-contain"/>
             <div className={"flex justify-center items-center pt-4"}>
                 <h3 className="flex text-sm font-semibold text-iw-title text-center"
                     data-testid="ItemBox-Text">{props.title}</h3>
