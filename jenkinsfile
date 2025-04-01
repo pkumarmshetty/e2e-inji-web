@@ -1,0 +1,99 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_REPO = 'https://github.com/Aparnadeloitte/e2e-inji-web.git'
+        GIT_BRANCH = 'end-to-end-test' 
+        DOCKER_IMAGE_BASE = 'raparna154/inji-web-service'
+        MANIFEST_REPO = 'https://github.com/Aparnadeloitte/Inji-infra-azure.git'
+        MANIFEST_BRANCH = 'prod'
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                script {
+                    git branch: '**/tags/*', url: "${GIT_REPO}"
+                }
+            }
+        }
+       
+        stage('Get Commit Hash.') {
+            steps {
+                script {
+                    env.DOCKER_IMAGE = "${DOCKER_IMAGE_BASE}:${env.GIT_COMMIT}-${env.BUILD_NUMBER}"
+                    echo "Docker Image Tag: ${env.DOCKER_IMAGE}"
+                }
+            }
+        }
+
+        stage('Build Docker Image.') {
+            steps {
+                script {
+                    dir('inji-web') {
+                        sh """
+                        docker build -t ${env.DOCKER_IMAGE} .
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhubpat', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh """
+                        echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
+                        docker push ${env.DOCKER_IMAGE}
+                        docker logout
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Update Manifest Repo') {
+             steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'githubpat2', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
+                        sh """
+                        rm -rf Inji-infra-azure
+                        # Clone manifest repo
+                        git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/Aparnadeloitte/Inji-infra-azure.git
+                        cd Inji-infra-azure
+                        git checkout ${MANIFEST_BRANCH}
+
+                        echo "Before update:"
+                        cat inji-web/values.yaml || true
+
+                        # Force update the image tag
+                        yq eval '.image.repository = "raparna154/inji-web-service" |
+                       .image.tag = "'"${env.GIT_COMMIT}-${env.BUILD_NUMBER}"'"
+                        ' -i inji-web/values.yaml
+
+                        # Debugging: Show after update
+                        echo "After update:"
+                        cat inji-web/values.yaml
+
+                        # Commit & Push changes if there are any
+                        git add inji-web/values.yaml
+                        git commit -m "Auto-update image repository to ${DOCKER_IMAGE_BASE} and tag to ${env.IMAGE_TAG}" || echo "No changes to commit"
+                        git push origin ${MANIFEST_BRANCH}
+                        """
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline completed successfully! updated image: ${env.DOCKER_IMAGE} in manifest repo."
+        }
+        failure {
+            echo "Failed! Last attempted Docker Image Tag: ${env.DOCKER_IMAGE}"
+        }
+    }
+}
