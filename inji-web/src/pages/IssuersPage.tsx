@@ -39,7 +39,7 @@ export const IssuersPage: React.FC = () => {
     }
     return <div data-testid="Home-Page-Container">
         <div className="container mx-auto mt-8 flex flex-col px-10">
-            <div className={"mb-20"}>
+            <div className={"mb-10"}>
                 <IntroBox/>
                 <SearchIssuer state={state} fetchRequest={fetchRequest}/>
             </div>
