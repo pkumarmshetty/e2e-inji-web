@@ -11,13 +11,7 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                script {
-                    git branch: '**/tags/*', url: "${GIT_REPO}"
-                }
-            }
-        }
+        
        
         stage('Get Commit Hash.') {
             steps {
