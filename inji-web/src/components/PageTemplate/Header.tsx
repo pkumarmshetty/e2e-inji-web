@@ -7,6 +7,7 @@ import {GiHamburgerMenu} from "react-icons/gi";
 import OutsideClickHandler from 'react-outside-click-handler';
 import { RootState } from "../../types/redux";
 import { useSelector } from "react-redux";
+import logo from "../../assets/logo.svg";
 export const Header: React.FC = () => {
 
     const language = useSelector((state: RootState) => state.common.language);
@@ -27,10 +28,10 @@ export const Header: React.FC = () => {
                          tabIndex={0}
                          onMouseDown={() => navigate("/")}
                          onKeyUp={() => navigate("/")}>
-                        <img src={require("../../assets/InjiWebLogo.png")}
+                        <img src={logo}
                               className={"h-15 w-25 scale-150 cursor-pointer object-contain"}
                              data-testid="Header-InjiWeb-Logo"
-                             alt="Inji Web Logo"
+                             alt="t & t Web Logo"
                              
                              />
                     </div>
