@@ -1,5 +1,6 @@
 import React from "react";
 import {useTranslation} from "react-i18next";
+import footerlogo from "../../assets/footerlogo.png"
 
 export const Footer: React.FC = () => {
 
@@ -11,7 +12,7 @@ export const Footer: React.FC = () => {
             <p data-testid="Footer-Text" className="ps-7 text-iw-subText transform rotate-180">{t("Footer.copyRight")}</p>
             <div className={"flex flex-row items-center me-4"}>
                 <p data-testid="Footer-Text" className="text-black transform rotate-180 font-bold">{t("Footer.product")}</p>
-                <img className={"w-10 h-10 transform rotate-180 m-2"} src={"https://api.collab.mosip.net/inji/mosip-logo.png"} alt={"a square mosip logo"} />
+                <img className={"w-10 h-10 transform rotate-180 m-2"} src={footerlogo} alt={"a square mosip logo"} />
             </div>
         </div>
     </footer>;
