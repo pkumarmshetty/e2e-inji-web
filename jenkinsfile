@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         GIT_REPO = 'https://github.com/Aparnadeloitte/e2e-inji-web.git'
-        GIT_BRANCH = 'test' 
+        GIT_BRANCH = 'dev' 
         DOCKER_IMAGE_BASE = 'raparna154/inji-web-service'
         MANIFEST_REPO = 'https://github.com/Aparnadeloitte/Inji-infra-azure.git'
         MANIFEST_BRANCH = 'main'
