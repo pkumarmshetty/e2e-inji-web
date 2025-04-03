@@ -26,7 +26,6 @@ export const IssuersList: React.FC<IssuersListProps> = ({state}) => {
         </div>
     }
 
-
     return <React.Fragment>
         <div data-testid="Issuers-List-Container" className={"flex flex-col items-center justify-center"}>
             <HeaderTile content={t("containerHeading")} subContent={t("containerSubHeading")}/>
